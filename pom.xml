@@ -10,9 +10,9 @@
 	</parent>
 
 	<groupId>br.com.darlan</groupId>
-	<artifactId>url-validation</artifactId>
+	<artifactId>url-validation-regex</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>url-validation</name>
+	<name>url-validation-regex</name>
 	<description>RabbitMQ Project</description>
 
 	<properties>
