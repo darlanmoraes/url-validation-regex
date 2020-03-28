@@ -1,6 +1,6 @@
 ## URL Validation Regex
 This application is responsible for the validation of URLs using regex expressions. These expressions are loaded from a **MySQL** database that is populated through a **RabbitMQ** Queue. This application does not have REST api's and is accessible using only **RabbitMQ**.
-There are 3 queues:
+There are 3 queues(remember to always use the **property** `content_type=application/json`):
 - `deadletter.queue`: Receives all messages that were not processed;
 - `insertion.queue`: Responsible for the creation of new rules in the regex whitelist. A listener is attached to the queue and validates/creates new whitelist rules on **MySQL**;
    - Ex. 1(invalid message, ends up in the deadletter): `{"client": "client1", "regex": "http://.***"}`;
