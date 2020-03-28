@@ -2,7 +2,7 @@
 This application is responsible for the validation of URLs using regex expressions. These expressions are loaded from a **MySQL** database that is populated through a **RabbitMQ** Queue. This application does not have REST api's and is accessible using only **RabbitMQ**.
 There are 3 queues:
 - `deadletter.queue`: Receives all messages that were not processed;
-- `insertion.queue`: Responsible for the creation of new rules in the regex whitelist. A listener is attached to the queue and validates/creates new whitelist rules on MySQL;
+- `insertion.queue`: Responsible for the creation of new rules in the regex whitelist. A listener is attached to the queue and validates/creates new whitelist rules on **MySQL**;
    - Ex. 1(invalid message, ends up in the deadletter): `{"client": "client1", "regex": "http://.***"}`;
    - Ex. 2(valid message, creates a private whitelist for the client): `{"client": "client1", "regex": "http://darlan\\.com"}`;
    - Ex. 3(valid message, creates a global whitelist for all clients): `{"client": "", "regex": "http://.*"}`;
@@ -19,7 +19,7 @@ There are 3 queues:
 - `docker-compose 1.25.4`;
 
 ### Starting
-Run the following commands:
+Run the following commands(the `docker-compose` file has **healthchecks** for **MySQL** and **RabbitMQ**, so the **Java** application will wait for them before the startup process):
 ```
 git clone https://github.com/darlanmoraes/url-validation-regex.git
 cd url-validation-regex
