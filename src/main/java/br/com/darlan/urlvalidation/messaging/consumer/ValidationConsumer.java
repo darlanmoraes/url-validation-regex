@@ -27,7 +27,7 @@ public class ValidationConsumer {
         this.validationService = validationService;
     }
 
-    @RabbitListener(queues = "${validation.queue}")
+    @RabbitListener(queues = "${validation.queue}", concurrency = "${spring.rabbitmq.validation.concurrency}")
     public void consume(@Valid @Payload final ValidationInMessage messageIn) {
         log.info("Received messageIn from queue VALIDATION_QUEUE. {}", messageIn);
         final UrlValidation validation = this.validationService.validateUrl(messageIn.getClient(),
